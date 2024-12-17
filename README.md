@@ -4,6 +4,7 @@
 - [Project Overview](#project-overview)
 - [Methodology](#methodology)
     - [Dataset](#dataset)
+- [Environment Setup](#environment-setup)
 - [References](#references)
 
 ## Project Overview
@@ -33,6 +34,39 @@ A typical way for humans to understand what is happening in a video is to ask th
 **• Ego4D** [[1]](#References): 3,000+ hours of egocentric video data.
 
 **• EPIC-KITCHENS** [[2]](#References): Annotated kitchen activity videos.
+
+## Environment Setup
+
+To set up the project environment and install all required dependencies, follow these steps:
+
+### 1. Create the Environment
+Create a Conda environment with from **requirements.txt**:
+
+```bash
+conda create --prefix ./env --file requirements.txt
+```
+
+### 2. Activate the Environment
+Activate the environment:
+
+```bash
+conda activate ./env
+```
+
+### 3. Install Dependencies
+Install the required dependencies listed in requirements.txt:
+
+```bash
+conda install --file requirements.txt
+```
+
+If you need to install a new package and update the dependency file:
+
+```bash
+conda install <package_name>
+conda list --export > requirements.txt
+```
+
 
 ## References
 [1] Grauman, Kristen, et al. "Ego4d: Around the world in 3,000 hours of egocentric video." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2022.
