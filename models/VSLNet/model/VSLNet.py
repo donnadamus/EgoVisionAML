@@ -82,7 +82,12 @@ class VSLNet(nn.Module):
 
         # TODO PROJECT
         # Here to modify the query feature extractor, but why
-        # if we use bert as predictor it forces to use bert as a query feature extractor as well?
+        # if we use bert as predictor (last part of the architecture, the one that predicts the timestamps)
+        # it forces to use bert as a query feature extractor as well?
+
+        # Apparently vslnet always deals with extracting the query features on its own, but wants the
+        # visual features from something else
+        # ... or at least this is what I understand so far ... might not be true
 
         # If pretrained transformer, initialize_parameters and load.
         if configs.predictor == "bert":
