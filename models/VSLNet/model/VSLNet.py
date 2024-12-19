@@ -80,6 +80,10 @@ class VSLNet(nn.Module):
             predictor=configs.predictor,
         )
 
+        # TODO PROJECT
+        # Here to modify the query feature extractor, but why
+        # if we use bert as predictor it forces to use bert as a query feature extractor as well?
+
         # If pretrained transformer, initialize_parameters and load.
         if configs.predictor == "bert":
             # Project back from BERT to dim.
