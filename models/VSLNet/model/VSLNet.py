@@ -85,9 +85,19 @@ class VSLNet(nn.Module):
         # if we use bert as predictor (last part of the architecture, the one that predicts the timestamps)
         # it forces to use bert as a query feature extractor as well?
 
+        """
+        
+        A possible answer ...
+        
+        The coupling between the predictor and the text feature extractor occurs because:
+	    BERT Changes How Queries Are Represented:
+	    When the predictor is BERT-based, it assumes it will receive BERT-style embeddings (rich contextualized representations).
+	    If the text extractor were not BERT, the query representation would lack the rich context needed for accurate timestamp localization.
+        
+        """
+
         # Apparently vslnet always deals with extracting the query features on its own, but wants the
         # visual features from something else
-        # ... or at least this is what I understand so far ... might not be true
 
         # If pretrained transformer, initialize_parameters and load.
         if configs.predictor == "bert":
