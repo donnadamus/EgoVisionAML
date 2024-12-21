@@ -154,13 +154,14 @@ def main(configs, parser):
                 # generate mask
                 video_mask = convert_length_to_mask(vfeat_lens).to(device)
                 # compute logits
+
+                # TODO PROJECT: Removed h_score from the return
                 # forward call
-                # remove h_score
                 start_logits, end_logits = model(
                     word_ids, char_ids, vfeats, video_mask, query_mask
                 )
 
-                # Not used in VSLBase loss
+                # TODO PROJECT: Not used in VSLBase loss
                 """
                 # compute loss
                 highlight_loss = model.compute_highlight_loss(
@@ -179,6 +180,7 @@ def main(configs, parser):
                 so we need to modify the architecture to remove it
                 """
 
+                # TODO PROJECT:
                 # total_loss = loc_loss + configs.highlight_lambda * highlight_loss
                 total_loss = loc_loss   # only loc_loss needed for vslbase
 
