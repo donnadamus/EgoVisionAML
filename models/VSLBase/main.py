@@ -125,14 +125,15 @@ def main(configs, parser):
                     char_ids,
                     s_labels,
                     e_labels,
-                    h_labels,
+                    # TODO: h_labels,
                 ) = data
                 # prepare features
                 vfeats, vfeat_lens = vfeats.to(device), vfeat_lens.to(device)
-                s_labels, e_labels, h_labels = (
+                # TODO: removed ", h_labels"
+                s_labels, e_labels = (
                     s_labels.to(device),
                     e_labels.to(device),
-                    h_labels.to(device),
+                    #TODO: h_labels.to(device),
                 )
                 if configs.predictor == "bert":
                     word_ids = {key: val.to(device) for key, val in word_ids.items()}

@@ -431,7 +431,8 @@ class CQConcatenate(nn.Module):
         output = self.conv1d(output)
         return output
 
-
+#TODO: Removed since we do not have QGH module
+"""
 class HighLightLayer(nn.Module):
     def __init__(self, dim):
         super(HighLightLayer, self).__init__()
@@ -457,7 +458,7 @@ class HighLightLayer(nn.Module):
         mask = mask.type(torch.float32)
         loss = torch.sum(loss_per_location * mask) / (torch.sum(mask) + epsilon)
         return loss
-
+"""
 
 class DynamicRNN(nn.Module):
     def __init__(self, dim):
