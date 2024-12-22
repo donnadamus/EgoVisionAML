@@ -569,6 +569,6 @@ class ConditionedPredictor(nn.Module):
         end_loss = nn.CrossEntropyLoss(reduction="mean")(end_logits, end_labels)
         return start_loss + end_loss
 
-    # TODO PROJECT
+    # INFO REMOVED
     # Here there's no 0.5 multiplied at start_loss and end_loss
     # differently from what reported on the paper

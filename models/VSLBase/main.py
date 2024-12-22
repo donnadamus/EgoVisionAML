@@ -125,15 +125,15 @@ def main(configs, parser):
                     char_ids,
                     s_labels,
                     e_labels,
-                    # TODO: h_labels,
+                    # INFO REMOVED: h_labels,
                 ) = data
                 # prepare features
                 vfeats, vfeat_lens = vfeats.to(device), vfeat_lens.to(device)
-                # TODO: removed ", h_labels"
+                # INFO REMOVED: removed ", h_labels"
                 s_labels, e_labels = (
                     s_labels.to(device),
                     e_labels.to(device),
-                    #TODO: h_labels.to(device),
+                    # INFO REMOVED: h_labels.to(device),
                 )
                 if configs.predictor == "bert":
                     word_ids = {key: val.to(device) for key, val in word_ids.items()}
@@ -156,13 +156,13 @@ def main(configs, parser):
                 video_mask = convert_length_to_mask(vfeat_lens).to(device)
                 # compute logits
 
-                # TODO PROJECT: Removed h_score from the return
+                # INFO REMOVED: Removed h_score from the return
                 # forward call
                 start_logits, end_logits = model(
                     word_ids, char_ids, vfeats, video_mask, query_mask
                 )
 
-                # TODO PROJECT: Not used in VSLBase loss
+                # INFO REMOVED: Not used in VSLBase loss
                 """
                 # compute loss
                 highlight_loss = model.compute_highlight_loss(
@@ -181,7 +181,7 @@ def main(configs, parser):
                 so we need to modify the architecture to remove it
                 """
 
-                # TODO PROJECT:
+                # INFO REMOVED:
                 # total_loss = loc_loss + configs.highlight_lambda * highlight_loss
                 total_loss = loc_loss   # only loc_loss needed for vslbase
 

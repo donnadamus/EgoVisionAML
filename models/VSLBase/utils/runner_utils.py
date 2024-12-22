@@ -95,7 +95,7 @@ def eval_test(
             # generate mask
             video_mask = convert_length_to_mask(vfeat_lens).to(device)
             # compute predicted results
-            # TODO PROJECT: Deleted third input which was: "_, ....."
+            # INFO REMOVED: Deleted third input which was: "_, ....."
             start_logits, end_logits = model(
                 word_ids, char_ids, vfeats, video_mask, query_mask
             )

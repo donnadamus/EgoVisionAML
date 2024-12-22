@@ -66,7 +66,7 @@ def read_command_line():
         help="character dimension, set to 100 for activitynet",
     )
     parser.add_argument("--dim", type=int, default=128, help="hidden size")
-    #TODO: no need for highlight lambda, there's no QGH module
+    #INFO REMOVED: no need for highlight lambda, there's no QGH module
     """
     parser.add_argument(
         "--highlight_lambda",

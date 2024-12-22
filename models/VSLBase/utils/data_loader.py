@@ -56,7 +56,7 @@ def train_collate_fn(data):
     batch_size = vfeat_lens.shape[0]
     s_labels = np.asarray(s_inds, dtype=np.int64)
     e_labels = np.asarray(e_inds, dtype=np.int64)
-    #TODO: do not need to compute h_labels without QGH module
+    #INFO REMOVED: do not need to compute h_labels without QGH module
     """
     h_labels = np.zeros(shape=[batch_size, max_len], dtype=np.int32)
     extend = 0.1
@@ -76,8 +76,8 @@ def train_collate_fn(data):
     vfeat_lens = torch.tensor(vfeat_lens, dtype=torch.int64)
     s_labels = torch.tensor(s_labels, dtype=torch.int64)
     e_labels = torch.tensor(e_labels, dtype=torch.int64)
-    #TODO: h_labels = torch.tensor(h_labels, dtype=torch.int64)
-    #TODO: removed ", h_labels"
+    #INFO REMOVED: h_labels = torch.tensor(h_labels, dtype=torch.int64)
+    #INFO REMOVED: removed ", h_labels"
     return records, vfeats, vfeat_lens, word_ids, char_ids, s_labels, e_labels 
 
 

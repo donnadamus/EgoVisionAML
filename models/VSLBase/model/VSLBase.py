@@ -150,7 +150,7 @@ class VSLBase(nn.Module):
         # features = features * h_score.unsqueeze(2)
         start_logits, end_logits = self.predictor(features, mask=v_mask)
 
-        # removed h_score in return
+        # INFO REMOVED: removed h_score in return
         return start_logits, end_logits
 
     def extract_index(self, start_logits, end_logits):
