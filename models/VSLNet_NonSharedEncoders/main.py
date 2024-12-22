@@ -9,7 +9,7 @@ import torch
 import torch.nn as nn
 import submitit
 from torch.utils.tensorboard.writer import SummaryWriter
-from model.VSLNet import build_optimizer_and_scheduler, VSLNet
+from model.VSLNet_non_shared_encoders import build_optimizer_and_scheduler, VSLNet
 from tqdm import tqdm
 from utils.data_gen import gen_or_load_dataset
 from utils.data_loader import get_test_loader, get_train_loader
