@@ -59,21 +59,22 @@ class VSLNet(nn.Module):
             drop_rate=configs.drop_rate,
         )
 
+        # Definizione dei due encoder separati
         self.feature_encoder_vision = FeatureEncoder(
-            dim=configs.dim, # TODO PROJECT, what is dim?
+            dim=configs.dim, # Dimensione del modello (es. 128, 256, etc.)
             num_heads=configs.num_heads, # Number of attention heads for transformer
-            kernel_size=7,  # for conv block
-            num_layers=4, # for conv block
-            max_pos_len=configs.max_pos_len, # TODO PROJECT, what is max_pos_len?
-            drop_rate=configs.drop_rate,
+            kernel_size=7,  # Dimensione del kernel per le convoluzioni
+            num_layers=4, # Numero di layer convoluzionali
+            max_pos_len=configs.max_pos_len, # Lunghezza massima della sequenza
+            drop_rate=configs.drop_rate, # Rate del dropout per regolarizzazione
         )
 
         self.feature_encoder_text = FeatureEncoder(
-            dim=configs.dim, # TODO PROJECT, what is dim?
-            num_heads=configs.num_heads, # Number of attention heads for transformer
-            kernel_size=7,  # for conv block
-            num_layers=4, # for conv block
-            max_pos_len=configs.max_pos_len, # TODO PROJECT, what is max_pos_len?
+            dim=configs.dim,
+            num_heads=configs.num_heads,
+            kernel_size=7,
+            num_layers=4,
+            max_pos_len=configs.max_pos_len,
             drop_rate=configs.drop_rate,
         )
 

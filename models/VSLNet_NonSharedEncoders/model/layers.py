@@ -320,19 +320,29 @@ class FeatureEncoder(nn.Module):
         self, dim, num_heads, max_pos_len, kernel_size=7, num_layers=4, drop_rate=0.0
     ):
         super(FeatureEncoder, self).__init__()
+        # 1. Embedding Posizionale
+        # Aggiunge informazione sulla posizione di ogni elemento nella sequenza
         self.pos_embedding = PositionalEmbedding(
-            num_embeddings=max_pos_len, embedding_dim=dim
+            num_embeddings=max_pos_len, # Numero massimo di posizioni
+            embedding_dim=dim           # Dimensione dell'embedding
         )
+        # 2. Blocco Convoluzionale
+        # Applica convoluzioni depth-wise separabili per catturare pattern locali
         self.conv_block = DepthwiseSeparableConvBlock(
             dim=dim, kernel_size=kernel_size, drop_rate=drop_rate, num_layers=num_layers
         )
+        # 3. Blocco di Attention
+        # Implementa il meccanismo di self-attention multi-head
         self.attention_block = MultiHeadAttentionBlock(
             dim=dim, num_heads=num_heads, drop_rate=drop_rate
         )
 
     def forward(self, x, mask=None):
+        # 1. Aggiunge l'informazione posizionale
         features = x + self.pos_embedding(x)  # (batch_size, seq_len, dim)
+        # 2. Applica le convoluzioni
         features = self.conv_block(features)  # (batch_size, seq_len, dim)
+        # 3. Applica la self-attention
         features = self.attention_block(
             features, mask=mask
         )  # (batch_size, seq_len, dim)
