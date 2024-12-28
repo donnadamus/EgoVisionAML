@@ -81,18 +81,22 @@ class VSLNet(nn.Module):
         )
 
         # TODO PROJECT
-        # Here to modify the query feature extractor, but why
-        # if we use bert as predictor (last part of the architecture, the one that predicts the timestamps)
+        # Here the query feature extractor can be modified, but why, if we use bert as predictor
+        # (last part of the architecture, the one that predicts the timestamps),
         # it forces to use bert as a query feature extractor as well?
+        #
+        # in "options.py" we have the following 2 options in the help message: bert, transformer.
+        # If we use -bert, a FeatureEncoder is used to compute the final start and end logits (the FeatureEncoder includes multi-heads).
+        # If we use -rnn, two RNNs are used to compute the final start and end logits.
 
         """
         
         A possible answer ...
         
         The coupling between the predictor and the text feature extractor occurs because:
-	    BERT Changes How Queries Are Represented:
-	    When the predictor is BERT-based, it assumes it will receive BERT-style embeddings (rich contextualized representations).
-	    If the text extractor were not BERT, the query representation would lack the rich context needed for accurate timestamp localization.
+	    - BERT Changes How Queries Are Represented:
+	      When the predictor is BERT-based, it assumes it will receive BERT-style embeddings (rich contextualized representations).
+	      If the text extractor were not BERT, the query representation would lack the rich context needed for accurate timestamp localization.
         
         """
 
