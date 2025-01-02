@@ -4,6 +4,7 @@
 - [Project Overview](#project-overview)
 - [Methodology](#methodology)
     - [Dataset](#dataset)
+- [Notebooks](#notebooks)
 - [Environment Setup](#environment-setup)
 - [References](#references)
 
@@ -35,37 +36,62 @@ A typical way for humans to understand what is happening in a video is to ask th
 
 **• EPIC-KITCHENS** [[2]](#References): Annotated kitchen activity videos.
 
-## Environment Setup
+## Notebooks
 
-To set up the project environment and install all required dependencies, follow these steps:
+This project contains several notebooks for processing the Ego4D dataset and further analysis. Each notebook is designed for a specific task within the pipeline.
 
-### 1. Create the Environment
-Create a Conda environment with from **requirements.txt**:
+### **1. Query Selection Notebook (  /notebooks/Query_selection.ipynb  )**
+**Purpose:** 
+- Selects the top 50 video queries predicted using VSLNet model with non-shared Encoder from the Ego4D dataset based on Intersection over Union (IoU) scores between model predictions and ground truth annotations.
 
-```bash
-conda create --prefix ./env --file requirements.txt
-```
+**Key Features:**
+1. **Mapping Predictions to Video IDs:**
+   - Matches `clip_uid` from the predictions with corresponding `video_uid` using the ground truth annotations.
+   - Fixes errors in ground truth timestamps (e.g., negative values close to 0).
 
-### 2. Activate the Environment
-Activate the environment:
+2. **Evaluate Predictions:**
+   - Computes IoU for each query and ranks the predictions.
+   - Evaluates performance using metrics like mean IoU and Recall@K (e.g., Recall@1, Recall@5).
 
-```bash
-conda activate ./env
-```
+3. **Select Top 50 Queries:**
+   - Outputs the top 50 queries with the highest IoU scores.
+   - Saves the results in `data/top_50_queries/top_queries.json`.
 
-### 3. Install Dependencies
-Install the required dependencies listed in requirements.txt:
+4. **Visualization:**
+   - Plots the IoU distribution and query rankings for better understanding of model performance.
 
-```bash
-conda install --file requirements.txt
-```
+**Output:**
+- A JSON file `top_queries.json` containing the selected queries, each with:
+  - `video_id`
+  - `clip_uid`
+  - `query`
+  - `ground_truth`
+  - `IoU score`
 
-If you need to install a new package and update the dependency file:
+---
 
-```bash
-conda install <package_name>
-conda list --export > requirements.txt
-```
+### **2. Clip Extraction Notebook (  /notebooks/Clip_extraction.ipynb  )**
+**Purpose:**
+- Extracts specific video clips corresponding to the top 50 queries from the Ego4D dataset using ground truth intervals.
+
+**Key Features:**
+1. **AWS Environment Setup:**
+   - Configures AWS CLI for accessing the Ego4D dataset hosted on S3.
+
+2. **Download Manifest:**
+   - Retrieves `manifest.csv`, which maps `video_id` to their respective S3 paths.
+
+3. **Process Queries:**
+   - Iterates over the top 50 queries from `top_queries.json`.
+   - Downloads the corresponding videos and extracts clips using FFmpeg.
+
+4. **Clip Storage:**
+   - Saves extracted clips in `/content/extracted_clips`.
+   - Compresses the folder into `/content/extracted_clips.zip` for easy download.
+
+**Output:**
+- Extracted clips saved in a compressed zip file for further analysis.
+
 
 
 ## References
