@@ -59,6 +59,7 @@ class VSLNet(nn.Module):
             drop_rate=configs.drop_rate,
         )
 
+        # INFO MODIFIED
         # Definizione dei due encoder separati
         self.feature_encoder_vision = FeatureEncoder(
             dim=configs.dim, # Dimensione del modello (es. 128, 256, etc.)
@@ -138,8 +139,11 @@ class VSLNet(nn.Module):
         else:
             query_features = self.embedding_net(word_ids, char_ids)
 
+        # INFO MODIFIED
+        # Chiamiamo separatamente gli encoder per le features testuali e visive
         query_features = self.feature_encoder_text(query_features, mask=q_mask)
         video_features = self.feature_encoder_vision(video_features, mask=v_mask)
+
         features = self.cq_attention(video_features, query_features, v_mask, q_mask)
         features = self.cq_concat(features, query_features, q_mask)
         h_score = self.highlight_layer(features, v_mask)

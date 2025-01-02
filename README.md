@@ -5,7 +5,6 @@
 - [Methodology](#methodology)
     - [Dataset](#dataset)
 - [Notebooks](#notebooks)
-- [Environment Setup](#environment-setup)
 - [References](#references)
 
 ## Project Overview
@@ -36,9 +35,31 @@ A typical way for humans to understand what is happening in a video is to ask th
 
 **• EPIC-KITCHENS** [[2]](#References): Annotated kitchen activity videos.
 
+## Models
+
+The "models" directory contains 3 subdirectories dedicated to the VSLNet model and its two variants: VSLBase and VSLNet with non shared encoders.
+
+<div align="center" style="padding: 40px 0;">
+  <img src="images/VSLNet_VSLBase.png" alt="VSLNet architecture" width="600">
+  <div style="font-size: 14px; color: gray; margin-top: 10px;">
+      <em>Figure 3: Architecture of the VSLBase and VSLNet models.</em>
+    <br>
+  </div>
+</div>
+
+### VSLNet
+This repository contains the baseline model [VSLNet][vslnet_baseline] .
+For further information on how to properly execute the code, please refer to the [README][vslnet_readme] file contained in the directory.
+
+### VSLBase
+The VSLBase model is obtained from the VSLNet baseline by removing the QGH (Query Guided Highlighter) module according its original implementation [[3]](#References) . All the modified code can be found under the tag "INFO REMOVED" .
+
+### VSLNet_NonSharedEncoders
+This VSLNet implementations exploits two separated Feature Encoders for textual and visual features (instead of a common one as seen in VSLNet baseline). The modified code can be found under the tag "INFO MODIFIED" .
+
 ## Notebooks
 
-This project contains several notebooks for processing the Ego4D dataset and further analysis. Each notebook is designed for a specific task within the pipeline.
+This project contains several notebooks for processing the Ego4D dataset and further analysis. Each notebook is designed for a specific task within the pipeline. It is recommended the usage of google colab in order to simplify package installation and to avoid problems arising from different execution environment .
 
 ### **1. Query Selection Notebook (  /notebooks/Query_selection.ipynb  )**
 **Purpose:** 
@@ -96,7 +117,16 @@ This project contains several notebooks for processing the Ego4D dataset and fur
 
 ## References
 [1] Grauman, Kristen, et al. "Ego4d: Around the world in 3,000 hours of egocentric video." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2022.
+
 [2] Damen, Dima, et al. "Rescaling egocentric vision: Collection, pipeline and challenges for epic-kitchens-100." International Journal of Computer Vision (2022): 1-23.
+
+[3] Zhang, Hao, et al. "Span-based Localizing Network for Natural Language Video Localization."
+ Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics.
+ 2020.
+
+
+[vslnet_baseline]: https://github.com/EGO4D/episodic-memory/tree/main/NLQ/VSLNet
+[vslnet_readme]: models\VSLNet\README.md
 
 
 
