@@ -61,7 +61,35 @@ This VSLNet implementations exploits two separated Feature Encoders for textual 
 
 This project contains several notebooks for processing the Ego4D dataset and further analysis. Each notebook is designed for a specific task within the pipeline. It is recommended the usage of google colab in order to simplify package installation and to avoid problems arising from different execution environment .
 
-### **1. Query Selection Notebook (  /notebooks/Query_selection.ipynb  )**
+### **1. Comprehensive Analysis Notebook (  /notebooks/Ego4D_analysis.ipynb  )**
+**Purpose:**
+- Provides an in-depth analysis of the Ego4D NLQ annotations, exploring patterns, distributions, and relationships in the dataset.
+
+**Key Features:**
+
+1. **Setup and Data Loading:**
+   - Loads annotation and metadata files.
+   - Structures annotations into a DataFrame for analysis.
+
+2. **Exploratory Data Analysis (EDA):**
+   - Visualizes key metrics like segment durations, template distributions, and common queries.
+   - Examines temporal patterns of annotations within videos.
+
+3. **Advanced Analysis:**
+   - **Template-Query Correlation:** Analyzes query diversity across templates.
+   - **Temporal Clustering:** Identifies density peaks in query positions within video timelines.
+   - **Slot and Verb Analysis:** Highlights frequently occurring objects and actions.
+
+**Visualizations:**
+- Histogram of segment durations.
+- Distribution of query templates.
+- Scatter plot of segment duration vs. relative video position.
+- KDE plot of query positions.
+
+**Output:**
+- Insights into dataset patterns and potential biases for further processing.
+
+### **2. Query Selection Notebook (  /notebooks/Query_selection.ipynb  )**
 **Purpose:** 
 - Selects the top 50 video queries predicted using VSLNet model with non-shared Encoder from the Ego4D dataset based on Intersection over Union (IoU) scores between model predictions and ground truth annotations.
 
@@ -91,7 +119,7 @@ This project contains several notebooks for processing the Ego4D dataset and fur
 
 ---
 
-### **2. Clip Extraction Notebook (  /notebooks/Clip_extraction.ipynb  )**
+### **3. Clip Extraction Notebook (  /notebooks/Clip_extraction.ipynb  )**
 **Purpose:**
 - Extracts specific video clips corresponding to the top 50 queries from the Ego4D dataset using ground truth intervals.
 
