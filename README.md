@@ -9,6 +9,10 @@
    - [VSLBase](#vslbase)
    - [VSLNet_NonSharedEncoders](#vslnet_nonsharedencoders)
 - [Notebooks](#notebooks)
+   - [VSLNet, VSLBase, VSLNet_NonSharedEncoders](#vslnet-vslbase-vslnet_nonsharedencoders)
+   - [Ego4D_analysis](#comprehensive-analysis)
+   - [Query Selection](#query-selection)
+   - [Clip Extraction](#clip-extraction)
 - [References](#references)
 
 ## Project Overview
@@ -65,7 +69,27 @@ This VSLNet implementations exploits two separated Feature Encoders for textual 
 
 This project contains several notebooks for processing the Ego4D dataset and further analysis. Each notebook is designed for a specific task within the pipeline. It is recommended the usage of google colab in order to simplify package installation and to avoid problems arising from different execution environment .
 
-### **1. Comprehensive Analysis Notebook (  /notebooks/Ego4D_analysis.ipynb  )**
+### VSLNet, VSLBase, VSLNet_NonSharedEncoders
+
+**Path**
+Each folder is related to one single model:
+- notebooks\VSLBase_TrainAndEval
+- notebooks\VSLNet_NonSharedEncoders_TrainAndEval
+- notebooks\VSLNet_TrainAndEval
+
+Each folder contains 2 notebooks regarding the training and evaluation process of the above mentioned models.
+
+One notebook exploits **EgoVLP video features** and one notebook exploits **Omnivore video features**. 
+
+The evaluation results are computed in the last cell of the notebooks.
+
+---
+
+### Comprehensive Analysis
+
+**Path:**
+/notebooks/Ego4D_analysis.ipynb
+
 **Purpose:**
 - Provides an in-depth analysis of the Ego4D NLQ annotations, exploring patterns, distributions, and relationships in the dataset.
 
@@ -93,7 +117,13 @@ This project contains several notebooks for processing the Ego4D dataset and fur
 **Output:**
 - Insights into dataset patterns and potential biases for further processing.
 
-### **2. Query Selection Notebook (  /notebooks/Query_selection.ipynb  )**
+---
+
+### **Query Selection**
+
+**Path:**
+/notebooks/Query_selection.ipynb
+
 **Purpose:** 
 - Selects the top 50 video queries predicted using VSLNet model with non-shared Encoder from the Ego4D dataset based on Intersection over Union (IoU) scores between model predictions and ground truth annotations.
 
@@ -123,7 +153,11 @@ This project contains several notebooks for processing the Ego4D dataset and fur
 
 ---
 
-### **3. Clip Extraction Notebook (  /notebooks/Clip_extraction.ipynb  )**
+### **Clip Extraction**
+
+**Path:**
+/notebooks/Clip_extraction.ipynb
+
 **Purpose:**
 - Extracts specific video clips corresponding to the top 50 queries from the Ego4D dataset using ground truth intervals.
 
@@ -144,7 +178,6 @@ This project contains several notebooks for processing the Ego4D dataset and fur
 
 **Output:**
 - Extracted clips saved in a compressed zip file for further analysis.
-
 
 
 ## References
