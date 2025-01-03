@@ -3,7 +3,11 @@
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Methodology](#methodology)
-    - [Dataset](#dataset)
+   - [Dataset](#dataset)
+- [Models](#models)
+   - [VSLNet](#vslnet)
+   - [VSLBase](#vslbase)
+   - [VSLNet_NonSharedEncoders](#vslnet_nonsharedencoders)
 - [Notebooks](#notebooks)
 - [References](#references)
 
@@ -16,7 +20,7 @@
   </div>
 </div>
 
-Egocentric Vision captures human interactions from a privileged viewpoint, thanks to cameras mounted directly on the head of the user performing the actions. The release of large-scale datasets, such as EPIC-KITCHENS [[2]](#References) and Ego4D [[1]](#References), has encouraged the research community to explore different opportunities for learning from egocentric videos, from the more traditional action recognition and anticipation tasks, to the use of natural language queries for video understanding.
+Egocentric Vision captures human interactions from a privileged viewpoint, thanks to cameras mounted directly on the head of the user performing the actions. The release of large-scale datasets, such as EPIC-KITCHENS [[2]](#references) and Ego4D [[1]](#references), has encouraged the research community to explore different opportunities for learning from egocentric videos, from the more traditional action recognition and anticipation tasks, to the use of natural language queries for video understanding.
 A typical way for humans to understand what is happening in a video is to ask themselves questions under the form of natural language queries, like "Where was object <x> last seen?" or "Which objects did the user interact with?". Thus, the goal becomes to identify the segment of the video that allows the query to be answered. The use of natural language allows greater flexibility in the kinds of queries that can be made.
 
 
@@ -31,9 +35,9 @@ A typical way for humans to understand what is happening in a video is to ask th
 
 ## Methodology
 ### Dataset :
-**• Ego4D** [[1]](#References): 3,000+ hours of egocentric video data.
+**• Ego4D** [[1]](#references): 3,000+ hours of egocentric video data.
 
-**• EPIC-KITCHENS** [[2]](#References): Annotated kitchen activity videos.
+**• EPIC-KITCHENS** [[2]](#references): Annotated kitchen activity videos.
 
 ## Models
 
@@ -52,10 +56,10 @@ This repository contains the baseline model [VSLNet][vslnet_baseline] .
 For further information on how to properly execute the code, please refer to the [README][vslnet_readme] file contained in the directory.
 
 ### VSLBase
-The VSLBase model is obtained from the VSLNet baseline by removing the QGH (Query Guided Highlighter) module according its original implementation [[3]](#References) . All the modified code can be found under the tag "INFO REMOVED" .
+The VSLBase model is obtained from the VSLNet baseline by removing the QGH (Query Guided Highlighter) module according its original implementation [[3]](#references) . All the modified code can be found under the tag **"INFO REMOVED"** .
 
 ### VSLNet_NonSharedEncoders
-This VSLNet implementations exploits two separated Feature Encoders for textual and visual features (instead of a common one as seen in VSLNet baseline). The modified code can be found under the tag "INFO MODIFIED" .
+This VSLNet implementations exploits two separated Feature Encoders for textual and visual features (instead of a common one as seen in VSLNet baseline). The modified code can be found under the tag **"INFO MODIFIED"** .
 
 ## Notebooks
 
