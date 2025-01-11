@@ -7,7 +7,7 @@ from multiprocessing.pool import Pool
 from tqdm import tqdm
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="question-answer-generation-using-gpt-3")
+    parser = argparse.ArgumentParser(description="question-answer-generation-using-gpt-4o")
     parser.add_argument("--pred_path", default=r'', help="The path to file containing prediction.")
     parser.add_argument("--output_dir", default=r'', help="The path to save annotation json files.")
     parser.add_argument("--output_json", default=r'', help="The path to save annotation final combined json file.")
@@ -20,7 +20,7 @@ def parse_args():
 
 def annotate(prediction_set, caption_files, output_dir, args):
     """
-    Evaluates question and answer pairs using GPT-3
+    Evaluates question and answer pairs using GPT-4o
     Returns a score for correctness.
     """
     # Set the OpenAI API key.
