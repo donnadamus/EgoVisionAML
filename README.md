@@ -1,6 +1,6 @@
 # Natural Language Queries in Egocentric Videos
 
-## Table of Contents
+## **Table of Contents**
 - [Project Overview](#project-overview)
 - [Methodology](#methodology)
    - [Dataset](#dataset)
@@ -13,9 +13,11 @@
    - [Ego4D_analysis](#comprehensive-analysis)
    - [Query Selection](#query-selection)
    - [Clip Extraction](#clip-extraction)
+   - [Predictions](#predictions)
+   - [Predictions evaluation](#predictions-evaluation)
 - [References](#references)
 
-## Project Overview
+## **Project Overview**
 <div align="center" style="padding: 40px 0;">
   <img src="images/ego4d_overview.png" alt="ego4d_overview" width="600">
   <div style="font-size: 14px; color: gray; margin-top: 10px;">
@@ -37,13 +39,13 @@ A typical way for humans to understand what is happening in a video is to ask th
 </div>
 
 
-## Methodology
+## **Methodology**
 ### Dataset :
 **• Ego4D** [[1]](#references): 3,000+ hours of egocentric video data.
 
 **• EPIC-KITCHENS** [[2]](#references): Annotated kitchen activity videos.
 
-## Models
+## **Models**
 
 The "models" directory contains 3 subdirectories dedicated to the VSLNet model and its two variants: VSLBase and VSLNet with non shared encoders.
 
@@ -65,13 +67,13 @@ The VSLBase model is obtained from the VSLNet baseline by removing the QGH (Quer
 ### VSLNet_NonSharedEncoders
 This VSLNet implementations exploits two separated Feature Encoders for textual and visual features (instead of a common one as seen in VSLNet baseline). The modified code can be found under the tag **"INFO MODIFIED"** .
 
-## Notebooks
+## **Notebooks**
 
 This project contains several notebooks for processing the Ego4D dataset and further analysis. Each notebook is designed for a specific task within the pipeline. It is recommended the usage of google colab in order to simplify package installation and to avoid problems arising from different execution environment .
 
 ### VSLNet, VSLBase, VSLNet_NonSharedEncoders
 
-**Path**
+**Path :**
 Each folder is related to one single model:
 - notebooks\VSLBase_TrainAndEval
 - notebooks\VSLNet_NonSharedEncoders_TrainAndEval
@@ -85,7 +87,7 @@ The evaluation results are computed in the last cell of the notebooks.
 
 ---
 
-### Comprehensive Analysis
+### **Comprehensive Analysis**
 
 **Path:**
 /notebooks/Ego4D_analysis.ipynb
@@ -179,6 +181,41 @@ The evaluation results are computed in the last cell of the notebooks.
 **Output:**
 - Extracted clips saved in a compressed zip file for further analysis.
 
+---
+
+### **Predictions**
+
+**Path :** notebooks\Predictions\ **LongVU_predictions.ipynb**
+
+This notebook implements the LongVU model [[5]](#references) (specifically the LongVU_Qwen2_7B version) for video understanding. At its core, it loads a specialized AI model designed to process videos and creates predictions based on their content. The notebook sets up the environment, loads the necessary model components, and includes a function called *infer_video* that processes video clips frame by frame. The code is structured to analyze multiple video clips from a directory and generate predictions based on specific queries about the video content.
+
+**Path :** notebooks\Predictions\ **VideoLlava_predictions.ipynb**
+
+This notebook implements the Video-LLaVA-7B model , a video understanding model [[4]](#references). The notebook includes functionality to process videos and can generate responses in different formats, offering two distinct prompting styles: a "user_assistant" format and a "raw" format. It's set up to process the same videos with different parameter configurations, specifically testing different maximum token lengths (20 and 1024 tokens) for the responses.
+
+---
+
+### **Predictions evaluation**
+
+**Path :** notebooks\Predictions evaluation\ **Evaluation_metrics.ipynb**
+
+This notebook implements three metrics used to evaluate previously generated predictions:
+
+**BLEU (Bilingual Evaluation Understudy)** works by comparing sequences of words (called n-grams) between the model's prediction and one or more reference texts. For example, if we have the prediction "The cat sat on the mat" and the reference "A cat is sitting on the mat", BLEU would look at how many word sequences match, considering groups of 1, 2, 3, and 4 words. It's particularly good at detecting when word order and phrasing match closely, but can be quite strict since it requires exact matches.
+
+**ROUGE (Recall-Oriented Understudy for Gisting Evaluation)** takes a different approach by focusing on recall - how much of the important information from the reference text appears in the prediction. It comes in several variants: **ROUGE-1** looks at individual word matches, **ROUGE-2** examines two-word sequences, and **ROUGE-L** finds the longest common subsequence of words. So, ROUGE checks whether the key pieces of information are present, even if they might appear in a slightly different order or phrasing. 
+
+**METEOR (Metric for Evaluation of Translation with Explicit ORdering)** is perhaps the most sophisticated of the three, as it understands that different words can mean the same thing. Unlike BLEU and ROUGE, which require exact word matches, METEOR can recognize synonyms (like "quick" and "fast") and variations of words (like "run" and "running"). It also considers word order and gives partial credit for phrases that are similar but not identical. This makes METEOR especially good at catching when responses are semantically correct even if they use different vocabulary than the reference.
+
+**Path :** notebooks\Predictions evaluation\ **eval_video_qa.py**
+
+This script takes a different approach by using GPT-4 as an automated evaluator (you can find the original script in the official repository of [VideoLLaVa][gpt-evaluator]):
+- Takes model predictions and ground truth answers
+- Sends them to GPT-4 to evaluate correctness
+- Has GPT-4 provide both a yes/no assessment and a score from 0-5
+- Calculates overall accuracy and average scores
+- Can process multiple evaluations in parallel for efficiency
+
 
 ## References
 [1] Grauman, Kristen, et al. "Ego4d: Around the world in 3,000 hours of egocentric video." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2022.
@@ -189,9 +226,14 @@ The evaluation results are computed in the last cell of the notebooks.
  Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics.
  2020.
 
+ [4] Lin, B., Ye, Y., Zhu, B., Cui, J., Ning, M., Jin, P., & Yuan, L. (2024). Video-LLaVA: Learning United Visual Representation by Alignment Before Projection. arXiv:2311.10122.
+
+ [5] Shen, X., Xiong, Y., Zhao, C., Wu, L., Chen, J., Zhu, C., Liu, Z., Xiao, F., Varadarajan, B., Bordes, F., Liu, Z., Xu, H., Kim, H. J., Soran, B., Krishnamoorthi, R., Elhoseiny, M., & Chandra, V. (2024). LongVU: Spatiotemporal Adaptive Compression for Long Video-Language Understanding. arXiv:2410.17434.
+
 
 [vslnet_baseline]: https://github.com/EGO4D/episodic-memory/tree/main/NLQ/VSLNet
 [vslnet_readme]: models\VSLNet\README.md
+[gpt-evaluator]: https://github.com/PKU-YuanGroup/Video-LLaVA/blob/main/videollava/eval/video/eval_video_qa.py
 
 
 
