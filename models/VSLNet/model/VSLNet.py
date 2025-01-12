@@ -77,13 +77,12 @@ class VSLNet(nn.Module):
             num_heads=configs.num_heads,
             drop_rate=configs.drop_rate,
             max_pos_len=configs.max_pos_len,
-            predictor=configs.predictor,
+            predictor=configs.predictor, # here if we have "bert" the predictor will be a feature encoder
         )
 
         # TODO PROJECT
-        # Here the query feature extractor can be modified, but why, if we use bert as predictor
-        # (last part of the architecture, the one that predicts the timestamps),
-        # it forces to use bert as a query feature extractor as well?
+        # Here the query feature extractor can be modified, but why, if we use bert as feature extractor,
+        # it forces to use a feature encoder as predictor?
         #
         # in "options.py" we have the following 2 options in the help message: bert, transformer.
         # If we use -bert, a FeatureEncoder is used to compute the final start and end logits (the FeatureEncoder includes multi-heads).
@@ -99,9 +98,6 @@ class VSLNet(nn.Module):
 	      If the text extractor were not BERT, the query representation would lack the rich context needed for accurate timestamp localization.
         
         """
-
-        # Apparently vslnet always deals with extracting the query features on its own, but wants the
-        # visual features from something else
 
         # If pretrained transformer, initialize_parameters and load.
         if configs.predictor == "bert":
